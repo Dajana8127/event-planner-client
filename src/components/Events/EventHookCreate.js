@@ -9,20 +9,23 @@ const Event1Create = (props) => {
   const [event1, setEvent1] = useState({ name: '', description: '', place: '' })
   const [createdEvent1Id, setCreatedEvent1Id] = useState(null)
 
-  const handleChange = event1 => {
-    event1.persist()
-
+  const handleChange = event => {
+    event.persist()
+    console.log('this is the event', event)
+    console.log('this is event.target', event.target)
+    console.log('this is event.target.name', event.target.name)
     setEvent1((prevEvent1) => {
-      const updatedField = { [event1.target.name]: event1.target.value }
+      const updatedField = { [event.target.name]: event.target.value }
 
       const editedEvent1 = Object.assign({}, prevEvent1, updatedField)
       return editedEvent1
     // setevent1(editedevent1)
     })
   }
-  const handleSubmit = event1 => {
-    event1.persist()
+  const handleSubmit = event => {
+    event.preventDefault()
     const { msgAlert, user } = props
+    console.log(user.token)
     axios({
       url: `${apiUrl}/events/`,
       headers: {
@@ -33,15 +36,19 @@ const Event1Create = (props) => {
         event1: {
           name: event1.name,
           place: event1.place,
-          description: event1.description
+          description: event1.description,
+          owner: user.id
         }
       }
     })
-      .then(response => setCreatedEvent1Id(response.data.event1.id))
+      .then(response => {
+        console.log('this is response', response)
+        setCreatedEvent1Id(response.data.id)
+      })
       .then(() => msgAlert({
         heading: 'Event Create Succes',
         message: 'You created an event successfully',
-        variant: 'Success'
+        variant: 'success'
       }))
       .catch(console.error)
   }
