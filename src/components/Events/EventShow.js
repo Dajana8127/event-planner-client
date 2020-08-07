@@ -153,6 +153,28 @@ class EventIndex extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Group>
+              <Form.Group controlId="date">
+                <Form.Label>Event Date</Form.Label>
+                <Form.Control
+                  required
+                  type="date"
+                  name="date"
+                  value={this.state.event1.date}
+                  placeholder="Enter event date"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="time">
+                <Form.Label>Event Time</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="time"
+                  value={this.state.event1.time}
+                  placeholder="Enter event time"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
               <Button
                 className="btn"
                 variant="primary"

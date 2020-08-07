@@ -38,7 +38,9 @@ const Event1Create = (props) => {
         event1: {
           name: event1.name,
           place: event1.place,
-          description: event1.description
+          description: event1.description,
+          date: event1.date,
+          time: event1.time
         }
       }
     })
@@ -104,6 +106,28 @@ const Event1Create = (props) => {
               name="description"
               value={event1.description}
               placeholder="What are you doing?"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="date">
+            <Form.Label>Event Date</Form.Label>
+            <Form.Control
+              required
+              type="date"
+              name="date"
+              value={event1.date}
+              placeholder="Date?"
+              onChange={handleChange}
+            />
+          </Form.Group>
+          <Form.Group controlId="time">
+            <Form.Label>Event Description</Form.Label>
+            <Form.Control
+              required
+              type="time"
+              name="time"
+              value={event1.time}
+              placeholder="Time?"
               onChange={handleChange}
             />
           </Form.Group>

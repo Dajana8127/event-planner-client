@@ -53,6 +53,7 @@ class EventIndex extends Component {
                     <li key={event1.id}>
                       <h3>{event1.name}</h3>
                       <h4>{event1.description}</h4>
+                      <h4>{event1.place}</h4>
                       <h4>{event1.date}</h4>
                       <h4>{event1.time}</h4>
                     </li>

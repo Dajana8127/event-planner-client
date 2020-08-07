@@ -56,6 +56,8 @@ class EventIndex extends Component {
                     <h3><Link to={`events/${event1.id}`}>{event1.name}</Link></h3>
                     <h4>{event1.description}</h4>
                     <h4>{event1.place}</h4>
+                    <h4>{event1.date}</h4>
+                    <h4>{event1.time}</h4>
                   </li>
                 )
               })}
