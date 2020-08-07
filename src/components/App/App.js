@@ -10,12 +10,15 @@ import SignOut from '../SignOut/SignOut'
 import ChangePassword from '../ChangePassword/ChangePassword'
 import Event1Create from '../Events/EventHookCreate'
 import EventIndex from '../Events/EventIndex'
+import EventShow from '../Events/EventShow'
+import MyEvents from '../Events/MyEvents'
 
 class App extends Component {
   constructor () {
     super()
 
     this.state = {
+      events: [],
       user: null,
       msgAlerts: []
     }
@@ -24,6 +27,8 @@ class App extends Component {
   setUser = user => this.setState({ user })
 
   clearUser = () => this.setState({ user: null })
+
+  setEvents = events => this.setState({ events: events })
 
   msgAlert = ({ heading, message, variant }) => {
     this.setState({ msgAlerts: [...this.state.msgAlerts, { heading, message, variant }] })
@@ -61,6 +66,13 @@ class App extends Component {
           )} />
           <AuthenticatedRoute user={user} path='/sign-out/' render={() => (
             <SignOut msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/events/:id' render={({ match }) => {
+            this.state.events.find(event1 => event1.id === match.params.id)
+            return <EventShow msgAlert={this.msgAlert} match={match} user={user} />
+          }} />
+          <AuthenticatedRoute user={user} path='/my-events/' render={() => (
+            <MyEvents msgAlert={this.msgAlert} clearUser={this.clearUser} user={user} />
           )} />
         </main>
       </Fragment>
