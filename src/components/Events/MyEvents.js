@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+// import Form from 'react-bootstrap/Form'
+// import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom'
 
 import apiUrl from '../../apiConfig'
 
@@ -27,13 +30,15 @@ class EventIndex extends Component {
         console.log('this is the user', user)
         const events = response.data
         const filteredEvents = events.filter(event1 => event1.owner === user.id)
+        const reversedFilteredEvents = filteredEvents.slice(0).reverse()
         // handle success
         this.setState({
-          myEvents: filteredEvents
+          myEvents: reversedFilteredEvents
         })
       })
       .catch(console.error)
   }
+
   render () {
     let jsx
     if (this.state.myEvents === null) {
@@ -48,7 +53,7 @@ class EventIndex extends Component {
               {this.state.myEvents.map(event1 => {
                 return (
                   <li key={event1.id}>
-                    <h3>{event1.name}</h3>
+                    <h3><Link to={`events/${event1.id}`}>{event1.name}</Link></h3>
                     <h4>{event1.description}</h4>
                     <h4>{event1.place}</h4>
                   </li>
