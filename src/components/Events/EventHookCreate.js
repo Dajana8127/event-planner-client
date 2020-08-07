@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-// import { Redirect } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Form from 'react-bootstrap/Form'
@@ -38,8 +38,7 @@ const Event1Create = (props) => {
         event1: {
           name: event1.name,
           place: event1.place,
-          description: event1.description,
-          owner: user.id
+          description: event1.description
         }
       }
     })
@@ -56,19 +55,19 @@ const Event1Create = (props) => {
       .catch(console.error)
   }
   console.log('this is the created id', createdEvent1Id)
-  if (createdEvent1Id) {
-    const jsx =
-    <div id='created-event'>
-      <h1>{event1.name}</h1>
-      <h2>{event1.description}</h2>
-      <h2>{event1.place}</h2>
-      <h2>See my events</h2>
-      <button><Link to='/my-events'>My events</Link></button>
-      <h2>Create a new event</h2>
-      <button onClick={''}>Create</button>
-    </div>
-    return jsx
-  }
+  // if (createdEvent1Id) {
+  //   const jsx =
+  //   <div id='created-event'>
+  //     <h1>{event1.name}</h1>
+  //     <h2>{event1.description}</h2>
+  //     <h2>{event1.place}</h2>
+  //     <h2>See my events</h2>
+  //     <button><Link to='/my-events'>My events</Link></button>
+  //     <h2>Create a new event</h2>
+  //     <button><Link to={'/create-event'}>Create</Link></button>
+  //   </div>
+  //   return jsx
+  // }
 
   return (
     <div className="row event-create">
@@ -116,6 +115,8 @@ const Event1Create = (props) => {
             Submit
           </Button>
         </Form>
+        <h2>See my events</h2>
+        <button><Link to='/my-events'>My events</Link></button>
       </div>
     </div>
   )
