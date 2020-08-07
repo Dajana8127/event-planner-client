@@ -1,19 +1,21 @@
 import React, { useState } from 'react'
-import { Redirect } from 'react-router-dom'
+// import { Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 const Event1Create = (props) => {
+  console.log('props are this', props)
   const [event1, setEvent1] = useState({ name: '', description: '', place: '' })
   const [createdEvent1Id, setCreatedEvent1Id] = useState(null)
 
   const handleChange = event => {
     event.persist()
-    console.log('this is the event', event)
-    console.log('this is event.target', event.target)
-    console.log('this is event.target.name', event.target.name)
+    // console.log('this is the event', event)
+    // console.log('this is event.target', event.target)
+    // console.log('this is event.target.name', event.target.name)
     setEvent1((prevEvent1) => {
       const updatedField = { [event.target.name]: event.target.value }
 
@@ -44,17 +46,28 @@ const Event1Create = (props) => {
       .then(response => {
         console.log('this is response', response)
         setCreatedEvent1Id(response.data.id)
+        console.log('this is created id', createdEvent1Id)
       })
       .then(() => msgAlert({
-        heading: 'Event Create Succes',
+        heading: 'Event Created Successfully',
         message: 'You created an event successfully',
         variant: 'success'
       }))
       .catch(console.error)
   }
+  console.log('this is the created id', createdEvent1Id)
   if (createdEvent1Id) {
-    return <Redirect to='/' />
-    // {`/events/${createdEvent1Id}`}
+    const jsx =
+    <div id='created-event'>
+      <h1>{event1.name}</h1>
+      <h2>{event1.description}</h2>
+      <h2>{event1.place}</h2>
+      <h2>See my events</h2>
+      <button><Link to='/my-events'>My events</Link></button>
+      <h2>Create a new event</h2>
+      <button onClick={''}>Create</button>
+    </div>
+    return jsx
   }
 
   return (
