@@ -43,7 +43,7 @@ class EventIndex extends Component {
     let jsx
     if (this.state.myEvents === null) {
       jsx = <p>Loading...</p>
-    } else if (this.state.myEvents.length === 0) {
+    } else if (this.state.myEvents !== null && this.state.myEvents.length === 0) {
       jsx = <p>You have not created any events so far. Go to create event page to create a new event.</p>
     } else {
       jsx = (
