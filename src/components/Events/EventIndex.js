@@ -11,18 +11,23 @@ class EventIndex extends Component {
       events: null
     }
   }
-  user = this.props
+
   componentDidMount () {
+    const { user } = this.props
+    console.log(user.token)
     axios({
       method: 'GET',
-      url: apiUrl + '/events/'
+      url: `${apiUrl}/events/`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
     })
       .then(response => {
+        console.log(response)
         // handle success
         this.setState({
           events: response.data
         })
-        this.setState(response.data)
       })
       .catch(console.error)
   }
@@ -68,3 +73,6 @@ export default EventIndex
 // // </Link>
 //
 // // <h3><Link to={`/events/${event1.id}`}>{event1.name}</Link></h3>
+// <Link to={`/events/${event1.id}/`}>
+//   <button className="btn">RSVP</button>
+// </Link>
