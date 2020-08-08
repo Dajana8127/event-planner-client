@@ -45,9 +45,17 @@ const Event1Create = (props) => {
       }
     })
       .then(response => {
-        console.log('this is response', response)
         setCreatedEvent1Id(response.data.id)
         console.log('this is created id', createdEvent1Id)
+        // setEvent1({
+        //   event1: {
+        //     name: '',
+        //     place: '',
+        //     description: '',
+        //     date: '',
+        //     time: ''
+        //   }
+        // })
       })
       .then(() => msgAlert({
         heading: 'Event Created Successfully',
@@ -72,9 +80,9 @@ const Event1Create = (props) => {
   // }
 
   return (
-    <div className="row event-create">
+    <div className="row event-create" style={{ width: '100vw' }}>
       <div className="col-sm-10 col-md-8 mx-auto mt-5">
-        <h1>Create Event</h1>
+        <h1 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Create Event</h1>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="eventName">
             <Form.Label>Event Name</Form.Label>

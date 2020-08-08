@@ -27,9 +27,9 @@ const unauthenticatedOptions = (
 // )
 
 const Header = ({ user }) => (
-  <Navbar bg="primary" variant="dark" expand="md">
-    <Navbar.Brand href="#">
-      event_planner_client
+  <Navbar style={ { backgroundColor: '#1c2e4a', fonrSize: '50px' } } variant="dark" expand="md">
+    <Navbar.Brand href="#" style= {{ fontSize: '40px' }}>
+      MeetNow
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />
     <Navbar.Collapse id="basic-navbar-nav">

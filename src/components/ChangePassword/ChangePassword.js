@@ -47,9 +47,9 @@ class ChangePassword extends Component {
     const { oldPassword, newPassword } = this.state
 
     return (
-      <div className="row">
+      <div className="row" style={{ width: '100vw' }}>
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Change Password</h3>
+          <h3 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Change Password</h3>
           <Form onSubmit={this.onChangePassword}>
             <Form.Group controlId="oldPassword">
               <Form.Label>Old password</Form.Label>
