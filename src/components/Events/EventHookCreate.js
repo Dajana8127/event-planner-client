@@ -47,15 +47,6 @@ const Event1Create = (props) => {
       .then(response => {
         setCreatedEvent1Id(response.data.id)
         console.log('this is created id', createdEvent1Id)
-        // setEvent1({
-        //   event1: {
-        //     name: '',
-        //     place: '',
-        //     description: '',
-        //     date: '',
-        //     time: ''
-        //   }
-        // })
       })
       .then(() => msgAlert({
         heading: 'Event Created Successfully',
