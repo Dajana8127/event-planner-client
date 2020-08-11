@@ -3,6 +3,7 @@ import axios from 'axios'
 import Row from 'react-bootstrap/Row'
 import Container from 'react-bootstrap/Container'
 import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../../apiConfig'
 
@@ -11,7 +12,8 @@ class EventIndex extends Component {
     super()
 
     this.state = {
-      events: null
+      events: null,
+      rsvp: ''
     }
   }
 
@@ -32,6 +34,61 @@ class EventIndex extends Component {
             events: response.data
           })
         })
+        .catch(console.error)
+    }
+  }
+
+  content = 'RSVP'
+
+  handleChange = event1 => {
+    console.log('this is the event1', event1)
+    console.log('rsvp has been clicked')
+    const { user, msgAlert } = this.props
+    axios({
+      method: 'POST',
+      url: `${apiUrl}/rsvps/`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      },
+      data: {
+        rsvp: {
+          event: event1.id
+        }
+      }
+    })
+      .then(response => {
+        console.log(response)
+        this.content = 'Cancel RSVP'
+        this.setState({
+          rsvp: response.data
+        })
+      })
+      .then(() => msgAlert({
+        heading: 'RSVP',
+        message: `You successfully RSVPed to ${event1.name}`,
+        variant: 'success'
+      }))
+      .catch(console.error)
+  }
+
+  handleCancel = event1 => {
+    const { msgAlert, user } = this.props
+    if (this.content === 'Cancel RSVP') {
+      axios({
+        method: 'DELETE',
+        url: `${apiUrl}/rsvps/${this.state.rsvp.id}`,
+        headers: {
+          'Authorization': `Token ${user.token}`
+        }
+      })
+        .then(() => {
+          this.content = 'RSVP'
+        })
+        .then(() => msgAlert({
+          heading: 'RSVP Cancelation',
+          message: 'You successfully canceled your RSVP',
+          variant: 'success'
+        }))
         .catch(console.error)
     }
   }
@@ -56,6 +113,14 @@ class EventIndex extends Component {
                     <h4>{event1.place}</h4>
                     <h4>{event1.date}</h4>
                     <h4>{event1.time}</h4>
+                    <h4>{event1.rsvps}</h4>
+                    <Button onClick={(() => {
+                      if (this.content === 'RSVP') {
+                        this.handleChange(event1)
+                      } else {
+                        this.handleCancel(event1)
+                      }
+                    })}>{this.content}</Button>
                   </Col>
                 )
               })}
@@ -83,3 +148,5 @@ export default EventIndex
 // <Link to={`/events/${event1.id}/`}>
 //   <button className="btn">RSVP</button>
 // </Link>
+
+// this.state.events.rsvps.push(this.state.rsvp.id)

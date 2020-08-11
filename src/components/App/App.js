@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
+import { Redirect } from 'react-router'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -39,6 +40,9 @@ class App extends Component {
 
     return (
       <Fragment>
+        <Route path='/' render={() => (
+          <Redirect to='/events'/>
+        )}/>
         <Header user={user} />
         {msgAlerts.map((msgAlert, index) => (
           <AutoDismissAlert

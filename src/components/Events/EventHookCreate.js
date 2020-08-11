@@ -8,7 +8,7 @@ import Button from 'react-bootstrap/Button'
 
 const Event1Create = (props) => {
   console.log('props are this', props)
-  const [event1, setEvent1] = useState({ name: '', description: '', place: '' })
+  const [event1, setEvent1] = useState({ name: '', description: '', place: '', time: '', date: '' })
   const [createdEvent1Id, setCreatedEvent1Id] = useState(null)
 
   const handleChange = event => {
@@ -47,6 +47,15 @@ const Event1Create = (props) => {
       .then(response => {
         setCreatedEvent1Id(response.data.id)
         console.log('this is created id', createdEvent1Id)
+      })
+      .then(() => {
+        setEvent1({
+          name: '',
+          place: '',
+          description: '',
+          date: '',
+          time: ''
+        })
       })
       .then(() => msgAlert({
         heading: 'Event Created Successfully',

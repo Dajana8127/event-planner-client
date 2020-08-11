@@ -3,6 +3,10 @@ import axios from 'axios'
 // import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 import { Link } from 'react-router-dom'
+import Row from 'react-bootstrap/Row'
+import Container from 'react-bootstrap/Container'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
 
 import apiUrl from '../../apiConfig'
 
@@ -47,27 +51,27 @@ class EventIndex extends Component {
       jsx = <p>You have not created any events so far. Go to create event page to create a new event.</p>
     } else {
       jsx = (
-        <div className="row">
-          <div className="col-sm-10 col-md-8 mx-auto mt-5 event-index">
-            <ul>
-              {this.state.myEvents.map(event1 => {
-                return (
-                  <li key={event1.id}>
-                    <h3><Link to={`events/${event1.id}`}>{event1.name}</Link></h3>
-                    <h4>{event1.description}</h4>
-                    <h4>{event1.place}</h4>
-                    <h4>{event1.date}</h4>
-                    <h4>{event1.time}</h4>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
+        <Container fluid>
+          <Row className="justify-content-md-center" style={{ color: 'white', width: '100wv' }}>
+            {this.state.myEvents.map(event1 => {
+              return (
+                <Col xs={6} md={4} lg={3} xl={3} style={{ border: '3px solid black', margin: '30px 20px', padding: '5px', width: '400px' }} key={event1.id}>
+                  <h3><Link to={`events/${event1.id}`}>{event1.name}</Link></h3>
+                  <h4>{event1.description}</h4>
+                  <h4>{event1.place}</h4>
+                  <h4>{event1.date}</h4>
+                  <h4>{event1.time}</h4>
+                  <h4>{event1.rsvps}</h4>
+                  <Button onClick={this.handleChange}>RSVP</Button>
+                </Col>
+              )
+            })}
+          </Row>
+        </Container>
       )
     }
     return (
-      <div>
+      <div style={{ width: '100vw' }}>
         <h1>My Events</h1>
         {jsx}
       </div>

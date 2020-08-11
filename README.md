@@ -1,6 +1,6 @@
 # Event Planner Client Application
 
-  The event planner app is a client facing app that allows clients to
+  The event planner app is a client facing app that allows clients to create events.
 
 # Links
 ### Deployed Client Site
@@ -36,3 +36,4 @@
 ![Screen Shot 2020-07-20 at 7 28 15 PM](https://i.imgur.com/4oUl6xO.jpg?1)
 
 # Future Development Plans
+I would like to add rsvp option so user can rsvp to events and make the code more clean.
