@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 # Event Planner Client Application
 
   The event planner app is a client facing app that allows clients to create events.
@@ -39,4 +37,3 @@
 
 # Future Development Plans
 I would like to add rsvp option so user can rsvp to events and make the code more clean.
->>>>>>> rsvp
