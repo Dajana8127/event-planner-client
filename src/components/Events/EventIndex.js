@@ -19,6 +19,7 @@ class EventIndex extends Component {
 
   componentDidMount () {
     const { user } = this.props
+    console.log('component did mount', user)
     if (user !== null) {
       axios({
         method: 'GET',
@@ -98,17 +99,17 @@ class EventIndex extends Component {
     jsx = <p style={{ fontSize: '75px', color: 'white', fontWeight: '150', textAlign: 'left', width: '100%', marginTop: '15px' }}>Sign in now to see<br/> all upcoming events!</p>
     if (user) {
       if (this.state.events === null) {
-        jsx = <p>Loading...</p>
+        jsx = <p style={{ fontSize: '4.6vw', color: 'white' }}>Loading...</p>
       } else if (this.state.events.length === 0) {
-        jsx = <p>No events created so far</p>
+        jsx = <p style={{ fontSize: '4.6vw', color: 'white' }}>No events created so far</p>
       } else {
         jsx = (
           <Container fluid>
             <Row className="justify-content-md-center" style={{ color: 'white' }}>
               {this.state.events.map(event1 => {
                 return (
-                  <Col xs={6} md={4} lg={3} xl={3} style={{ border: '3px solid black', margin: '30px 20px', padding: '5px', width: '400px' }} key={event1.id}>
-                    <h3>{event1.name}</h3>
+                  <Col xs={6} md={4} lg={3} xl={3} style={{ margin: '30px 20px', padding: '5px', width: '400px', textAlign: 'center', color: '#4C603A', border: 'solid 2px #A6817B' }} key={event1.id}>
+                    <h3 style={{ fontSize: '33px', fontWeight: '700' }}>{event1.name}</h3>
                     <h4>{event1.description}</h4>
                     <h4>{event1.place}</h4>
                     <h4>{event1.date}</h4>
@@ -131,7 +132,7 @@ class EventIndex extends Component {
     }
     return (
       <div style={{ position: 'relative', display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'space-between', padding: '0.5rem 1rem', width: '100vw' }}>
-        <h1 style={{ color: 'white', fontSize: '40px', marginTop: '15px' }}>Events Page</h1>
+        <h1 style={{ color: '#A6817B', fontSize: '40px', marginTop: '15px' }}>Events Page</h1>
         {jsx}
       </div>
     )

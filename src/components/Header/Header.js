@@ -14,7 +14,6 @@ const authenticatedOptions = (
 
 const unauthenticatedOptions = (
   <Fragment>
-    <Nav.Link href="#events">Events</Nav.Link>
     <Nav.Link href="#sign-up">Sign Up</Nav.Link>
     <Nav.Link href="#sign-in">Sign In</Nav.Link>
   </Fragment>
@@ -27,8 +26,8 @@ const unauthenticatedOptions = (
 // )
 
 const Header = ({ user }) => (
-  <Navbar style={ { backgroundColor: '#1c2e4a', fonrSize: '50px' } } variant="dark" expand="md">
-    <Navbar.Brand href="#" style= {{ fontSize: '40px' }}>
+  <Navbar style={ { backgroundColor: '#A6817B', fonrSize: '50px' } } variant="dark" expand="md">
+    <Navbar.Brand href="#" style= {{ fontSize: '4.5vw' }}>
       MeetNow
     </Navbar.Brand>
     <Navbar.Toggle aria-controls="basic-navbar-nav" />

@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Route } from 'react-router-dom'
-import { Redirect } from 'react-router'
+// import { Redirect } from 'react-router'
 
 import AuthenticatedRoute from '../AuthenticatedRoute/AuthenticatedRoute'
 import AutoDismissAlert from '../AutoDismissAlert/AutoDismissAlert'
@@ -13,6 +13,7 @@ import Event1Create from '../Events/EventHookCreate'
 import EventIndex from '../Events/EventIndex'
 import EventShow from '../Events/EventShow'
 import MyEvents from '../Events/MyEvents'
+import Home from '../Home/HomePage'
 
 class App extends Component {
   constructor () {
@@ -40,9 +41,6 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Route path='/' render={() => (
-          <Redirect to='/events'/>
-        )}/>
         <Header user={user} />
         {msgAlerts.map((msgAlert, index) => (
           <AutoDismissAlert
@@ -59,7 +57,10 @@ class App extends Component {
           <Route path='/sign-in/' render={() => (
             <SignIn msgAlert={this.msgAlert} setUser={this.setUser} />
           )} />
-          <Route user={user} exact path='/events/' render={() => (
+          <Route user={user} exact path='/' render={() => (
+            <Home />
+          )} />
+          <AuthenticatedRoute user={user} exact path='/events/' render={() => (
             <EventIndex msgAlert={this.msgAlert} user={user} />
           )} />
           <AuthenticatedRoute user={user} path='/create-event/' render={() => (
@@ -85,3 +86,7 @@ class App extends Component {
 }
 
 export default App
+
+// <Route path='/' render={() => (
+//   <EventIndex msgAlert={this.msgAlert}/>
+// )}/>

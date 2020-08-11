@@ -126,7 +126,7 @@ class EventIndex extends Component {
                   required
                   type="text"
                   name="name"
-                  value={this.state.event1.name}
+                  value={this.state.event1.name || ''}
                   placeholder="Enter event name"
                   onChange={this.handleChange}
                 />
@@ -137,7 +137,7 @@ class EventIndex extends Component {
                   required
                   type="text"
                   name="place"
-                  value={this.state.event1.place}
+                  value={this.state.event1.place || ''}
                   placeholder="Location"
                   onChange={this.handleChange}
                 />
@@ -148,7 +148,7 @@ class EventIndex extends Component {
                   required
                   type="text"
                   name="description"
-                  value={this.state.event1.description}
+                  value={this.state.event1.description || ''}
                   placeholder="What are you doing?"
                   onChange={this.handleChange}
                 />
@@ -159,7 +159,7 @@ class EventIndex extends Component {
                   required
                   type="date"
                   name="date"
-                  value={this.state.event1.date}
+                  value={this.state.event1.date || ''}
                   placeholder="Enter event date"
                   onChange={this.handleChange}
                 />
@@ -168,9 +168,9 @@ class EventIndex extends Component {
                 <Form.Label>Event Time</Form.Label>
                 <Form.Control
                   required
-                  type="text"
+                  type="time"
                   name="time"
-                  value={this.state.event1.time}
+                  value={this.state.event1.time || ''}
                   placeholder="Enter event time"
                   onChange={this.handleChange}
                 />
@@ -183,6 +183,7 @@ class EventIndex extends Component {
                 Update
               </Button>
             </Form>
+            <br/>
             <Form onSubmit={this.deleteEvent}>
               <Button
                 className="btn"
