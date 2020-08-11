@@ -27,13 +27,13 @@ class SignIn extends Component {
     const { msgAlert, history, setUser } = this.props
 
     signIn(this.state)
-      .then(res => setUser(res.data.user))
+      .then(res => setUser(res.data))
       .then(() => msgAlert({
         heading: 'Sign In Success',
         message: messages.signInSuccess,
         variant: 'success'
       }))
-      .then(() => history.push('/'))
+      .then(() => history.push('/events'))
       .catch(error => {
         this.setState({ email: '', password: '' })
         msgAlert({
@@ -48,11 +48,11 @@ class SignIn extends Component {
     const { email, password } = this.state
 
     return (
-      <div className="row">
+      <div className="row" style={{ width: '100vw' }}>
         <div className="col-sm-10 col-md-8 mx-auto mt-5">
-          <h3>Sign In</h3>
+          <h3 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>Sign In</h3>
           <Form onSubmit={this.onSignIn}>
-            <Form.Group controlId="email">
+            <Form.Group controlId="email" >
               <Form.Label>Email address</Form.Label>
               <Form.Control
                 required
