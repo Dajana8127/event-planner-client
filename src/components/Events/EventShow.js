@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 import apiUrl from '../../apiConfig'
 
-class EventIndex extends Component {
+class EventShow extends Component {
   constructor () {
     super()
 
@@ -206,7 +206,7 @@ class EventIndex extends Component {
   }
 }
 
-export default EventIndex
+export default EventShow
 
 // <h3>{this.state.event1.name}</h3>
 // <h4>{this.state.event1.place}</h4>

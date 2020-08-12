@@ -13,6 +13,7 @@ class EventIndex extends Component {
 
     this.state = {
       events: null,
+      rsvps: [],
       rsvp: ''
     }
   }
@@ -39,8 +40,6 @@ class EventIndex extends Component {
     }
   }
 
-  content = 'RSVP'
-
   handleChange = event1 => {
     console.log('this is the event1', event1)
     console.log('rsvp has been clicked')
@@ -59,10 +58,10 @@ class EventIndex extends Component {
     })
       .then(response => {
         console.log(response)
-        this.content = 'Cancel RSVP'
         this.setState({
           rsvp: response.data
         })
+        this.state.rsvps.push(this.state.rsvp.owner)
       })
       .then(() => msgAlert({
         heading: 'RSVP',
@@ -72,27 +71,28 @@ class EventIndex extends Component {
       .catch(console.error)
   }
 
-  handleCancel = event1 => {
-    const { msgAlert, user } = this.props
-    if (this.content === 'Cancel RSVP') {
-      axios({
-        method: 'DELETE',
-        url: `${apiUrl}/rsvps/${this.state.rsvp.id}`,
-        headers: {
-          'Authorization': `Token ${user.token}`
-        }
-      })
-        .then(() => {
-          this.content = 'RSVP'
-        })
-        .then(() => msgAlert({
-          heading: 'RSVP Cancelation',
-          message: 'You successfully canceled your RSVP',
-          variant: 'success'
-        }))
-        .catch(console.error)
-    }
-  }
+  // handleCancel = event1 => {
+  //   const { msgAlert, user } = this.props
+  //   if (this.content === 'Cancel RSVP') {
+  //     axios({
+  //       method: 'DELETE',
+  //       url: `${apiUrl}/rsvps/${this.state.rsvp.id}`,
+  //       headers: {
+  //         'Authorization': `Token ${user.token}`
+  //       }
+  //     })
+  //       .then(() => {
+  //         this.content = 'RSVP'
+  //       })
+  //       .then(() => msgAlert({
+  //         heading: 'RSVP Cancelation',
+  //         message: 'You successfully canceled your RSVP',
+  //         variant: 'success'
+  //       }))
+  //       .catch(console.error)
+  //   }
+  // }
+
   render () {
     let jsx
     const { user } = this.props
@@ -114,14 +114,9 @@ class EventIndex extends Component {
                     <h4>{event1.place}</h4>
                     <h4>{event1.date}</h4>
                     <h4>{event1.time}</h4>
-                    <h4>{event1.rsvps}</h4>
                     <Button onClick={(() => {
-                      if (this.content === 'RSVP') {
-                        this.handleChange(event1)
-                      } else {
-                        this.handleCancel(event1)
-                      }
-                    })}>{this.content}</Button>
+                      this.handleChange(event1)
+                    })}>RSVP</Button>
                   </Col>
                 )
               })}

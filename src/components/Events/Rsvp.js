@@ -1,88 +1,213 @@
-// import React from 'react'
-// import axios from 'axios'
-// import apiUrl from '../../apiConfig'
-// import Row from 'react-bootstrap/Row'
-// import Container from 'react-bootstrap/Container'
-// import Col from 'react-bootstrap/Col'
-// import Button from 'react-bootstrap/Button'
-//
-// const Rsvp = (props) => {
-//   console.log('props', this.props)
-//   const handleChange = (event) => {
-//     console.log('rsvp has been clicked')
-//     const { user } = this.props
-//     axios({
-//       method: 'POST',
-//       url: `${apiUrl}/rsvps/`,
-//       headers: {
-//         'Authorization': `Token ${user.token}`
-//       },
-//       data: {
-//         rsvp: {
-//           going: 'True'
-//         }
-//       }
-//     })
-//       .then(response => {
-//         console.log(response)
-//         // handle success
-//         this.setState({
-//           rsvp: response.data
-//         })
-//       })
-//       .catch(console.error)
-//     axios({
-//       method: 'POST',
-//       url: `${apiUrl}/connections/`,
-//       headers: {
-//         'Authorization': `Token ${user.token}`
-//       },
-//       data: {
-//         connection: {
-//           rsvp_id: `${this.state.rsvp.id}`,
-//           event_id: `${this.props.event1.id}`
-//         }
-//       }
-//     })
-//       .then(response => {
-//         console.log(response)
-//         // handle success
-//         this.setState({
-//           connection: response.data
-//         })
-//       })
-//       .catch(console.error)
-//     this.state.events.rsvps.push(this.state.rsvp.id)
-//
-//     axios({
-//       method: 'PATCH',
-//       url: `${apiUrl}/events/${this.props.event1.id}`,
-//       headers: {
-//         'Authorization': `Token ${user.token}`
-//       },
-//       data: {
-//         event1: {
-//           rsvps: this.state.events.rsvps
-//         }
-//       }
-//     })
-//   }
-//   return (
-//     <Container fluid>
-//       <Row className="justify-content-md-center" style={{ color: 'white' }}>
-//         <Col xs={6} md={4} lg={3} xl={3} style={{ border: '3px solid black', margin: '30px 20px', padding: '5px', width: '400px' }}>
-//           <Button onClick={handleChange}>RSVP</Button>
-//         </Col>
-//       </Row>
-//     </Container>
-//   )
-// }
-//
-// export default Rsvp
-//
-// // <h2>{this.props.event1.name}</h2>
-// // <h4>{this.props.event1.description}</h4>
-// // <h4>{this.props.event1.place}</h4>
-// // <h4>{this.props.event1.date}</h4>
-// // <h4>{this.props.event1.time}</h4>
-// // <h4>Placeholder for emails of the users{this.props.event1.rsvps}</h4>
+import React, { Component } from 'react'
+import axios from 'axios'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
+import { Redirect } from 'react-router-dom'
+
+import apiUrl from '../../apiConfig'
+
+class EventShow extends Component {
+  constructor () {
+    super()
+
+    this.state = {
+      event1: '',
+      updated: false,
+      deleted: false
+    }
+  }
+  componentDidMount () {
+    console.log(this.props)
+    const { user } = this.props
+    const id = this.props.match.params.id
+    axios({
+      method: 'GET',
+      url: apiUrl + `/events/${id}/`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
+    })
+      .then(response => {
+        // handle success
+        this.setState({
+          event1: response.data
+        })
+      })
+      .catch(console.error)
+  }
+
+  handleChange = event => {
+    event.preventDefault()
+    console.log('clicked', event)
+    // get the key from the input name field
+    const event1Key = event.target.name
+    // get the input value that the user typed in
+    const value = event.target.value
+    // make a copy of the current state
+    const event1Copy = Object.assign({}, this.state.event1)
+    // update the copy with the new user input
+    event1Copy[event1Key] = value
+    // update the state with the updated copy
+    this.setState({ event1: event1Copy })
+  }
+
+  handleSubmit = event => {
+    event.preventDefault()
+    const id = this.props.match.params.id
+    console.log(id)
+    const { msgAlert, user } = this.props
+    axios({
+      method: 'PATCH',
+      url: `${apiUrl}/events/${id}/`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      },
+      data: {
+        event1: this.state.event1
+      }
+    })
+      .then(response => {
+        this.setState({
+          updated: true,
+          event1: response.data
+        })
+      })
+      .then(() => msgAlert({
+        heading: 'Event Update Success',
+        message: 'You updated event successfully',
+        variant: 'success'
+      }))
+      .catch(console.error)
+  }
+
+  deleteEvent = event => {
+    const id = this.props.match.params.id
+    const { msgAlert, user } = this.props
+    console.log('clicked', event)
+    axios({
+      method: 'DELETE',
+      url: `${apiUrl}/events/${id}`,
+      headers: {
+        'Authorization': `Token ${user.token}`
+      }
+    })
+      .then(() => {
+        this.setState({
+          deleted: true
+        })
+      })
+      .then(() => msgAlert({
+        heading: 'Event Deleted Successfully',
+        message: 'The event is deleted',
+        variant: 'success'
+      }))
+      .catch(console.error)
+  }
+
+  render () {
+    // const id = this.props.match.params.id
+    if (this.state.updated === true || this.state.deleted === true) {
+      return <Redirect to={'/my-events'}></Redirect>
+    }
+    let jsx
+    // if the API has not responded yet
+    if (this.state.event1 === null) {
+      jsx = <p>Loading...</p>
+    // after API responds
+    } else {
+      jsx = (
+        <div className="row event-show">
+          <div className="col-sm-10 col-md-8 mx-auto mt-5">
+            <h1>Update Event</h1>
+            <Form onSubmit={this.handleSubmit}>
+              <Form.Group controlId="name">
+                <Form.Label>Event Name</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="name"
+                  value={this.state.event1.name || ''}
+                  placeholder="Enter event name"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="place">
+                <Form.Label>Location</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="place"
+                  value={this.state.event1.place || ''}
+                  placeholder="Location"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="description">
+                <Form.Label>Event Description</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="description"
+                  value={this.state.event1.description || ''}
+                  placeholder="What are you doing?"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="date">
+                <Form.Label>Event Date</Form.Label>
+                <Form.Control
+                  required
+                  type="date"
+                  name="date"
+                  value={this.state.event1.date || ''}
+                  placeholder="Enter event date"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="time">
+                <Form.Label>Event Time</Form.Label>
+                <Form.Control
+                  required
+                  type="time"
+                  name="time"
+                  value={this.state.event1.time || ''}
+                  placeholder="Enter event time"
+                  onChange={this.handleChange}
+                />
+              </Form.Group>
+              <Button
+                className="btn"
+                variant="primary"
+                type="submit"
+              >
+                Update
+              </Button>
+            </Form>
+            <br/>
+            <Form onSubmit={this.deleteEvent}>
+              <Button
+                className="btn"
+                variant="primary"
+                type="submit"
+              >
+                Delete
+              </Button>
+            </Form>
+          </div>
+        </div>
+      )
+    }
+    return (
+      <div className="event1-show">
+        <h2>Your event</h2>
+        {jsx}
+      </div>
+    )
+  }
+}
+
+export default EventShow
+
+// <h3>{this.state.event1.name}</h3>
+// <h4>{this.state.event1.place}</h4>
+// <h4>{this.state.event1.description}</h4>

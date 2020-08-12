@@ -60,7 +60,6 @@ class EventIndex extends Component {
                   <h4>{event1.place}</h4>
                   <h4>{event1.date}</h4>
                   <h4>{event1.time}</h4>
-                  <h4>{event1.rsvps}</h4>
                 </Col>
               )
             })}

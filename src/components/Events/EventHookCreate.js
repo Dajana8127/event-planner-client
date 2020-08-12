@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 // import { Link } from 'react-router-dom'
 import axios from 'axios'
 import apiUrl from '../../apiConfig'
@@ -147,8 +146,6 @@ const Event1Create = (props) => {
             Submit
           </Button>
         </Form>
-        <h2>See my events</h2>
-        <button><Link to='/my-events'>My events</Link></button>
       </div>
     </div>
   )
