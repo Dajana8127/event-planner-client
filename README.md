@@ -20,6 +20,7 @@
   4. User is able to see each individual event that they created.
   5. User is able to create new events.
   6. User is able to update and delete events.
+  7. User is able to rsvp to events.
 
 
 # Technologies Used:
@@ -33,7 +34,16 @@
   - PostgreSQL
 
 # Wireframes
-![Screen Shot 2020-07-20 at 7 28 15 PM](https://i.imgur.com/4oUl6xO.jpg?1)
+![Wireframe](https://i.imgur.com/4oUl6xO.jpg?1)
+
+# App Screenshot
+![App](https://i.imgur.com/gvyzbWz.png)
+
 
 # Future Development Plans
-I would like to add rsvp option so user can rsvp to events and make the code more clean.
+I would like to add rsvp cancel option so user can cancel their rsvps to events and make the code more clean.
+
+# Setup Steps
+1. Fork and clone this repository.
+2. Run npm install to install all dependencies.
+3. Use npm start to serve the application on your local server.
