@@ -4,7 +4,7 @@
 
 # Links
 ### Deployed Client Site
-  <>
+  <https://dajana8127.github.io/event_planner_client/>
 ### Back-End Repository
   <https://github.com/Dajana8127/project_event_planner>
 ### Deployed API
