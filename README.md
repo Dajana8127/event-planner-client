@@ -1,17 +1,17 @@
 # Event Planner Client Application
 
-  The event planner app is a client facing app that allows clients to create events.
+The event planner app is a client facing app that allows clients to create, update and delete events. Users can see all created events and RSVP to them.
 
 # Links
 ### Deployed Client Site
-  <https://dajana8127.github.io/event_planner_client/>
+  <https://dajana8127.github.io/event-planner-client/>
 ### Back-End Repository
   <https://github.com/Dajana8127/project_event_planner>
 ### Deployed API
   <https://project-event-planner.herokuapp.com/>
 
 # Planning
-  My planning started with user stories, wireframes and ERDs. I had planned to finish backend repository in the first day, next 2 days I worked on connecting the frontend to the backend. By the 3rd day I had an app where user is able to sign up, sign in, change their password, sign out, get all events, create new events and then update and delete those events.
+My planning started with user stories, wireframes and ERDs. I had planned to finish backend repository in the first day, next 2 days I worked on connecting the frontend to the backend. By the 3rd day I had an app where user is able to sign up, sign in, change their password, sign out, get all events, create new events and then update and delete those events.
 
 # User stories
   1. User is able signup/create an account, sign in, change password and sign out.
@@ -44,6 +44,6 @@
 I would like to add rsvp cancel option so user can cancel their rsvps to events and make the code more clean.
 
 # Setup Steps
-1. Fork and clone this repository.
-2. Run npm install to install all dependencies.
-3. Use npm start to serve the application on your local server.
+  1. Fork and clone this repository.
+  2. Run npm install to install all dependencies.
+  3. Use npm start to serve the application on your local server.
